@@ -52,17 +52,19 @@ export default {
       dangerShow: false
     }
   },
+  computed: {
+   
+  },
   methods: {
     onSubmit (evt) {
       evt.preventDefault();
       // alert(JSON.stringify(this.form));
-      console.log('//')
-      this.checkMenu()
-    },
-    checkMenu () {
-      this.$router.push('/Menu')
+      console.log(this.$store)
+      this.$store.dispatch('SIGNIN')
+      // this.checkMenu()
     }
-  }
+  },
+ 
 }
 </script>
 

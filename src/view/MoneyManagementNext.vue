@@ -7,26 +7,7 @@
                   class="text-center" 
                   bg-variant="Light">
             <b-alert show class="text-left">充值确认，请确认下方充值信息，确认无误后点击提交执行操作</b-alert>
-            <b-row class="my-1">
-              <b-col cols="4" class="text-right">申请人：</b-col>
-              <b-col>王大大</b-col>
-            </b-row>
-            <b-row class="my-1">
-              <b-col cols="4" class="text-right">充值用户懒设计账号：</b-col>
-              <b-col>123456456@qq.com</b-col>
-            </b-row>
-            <b-row class="my-1">
-              <b-col cols="4" class="text-right">充值实收总额：</b-col>
-              <b-col>200</b-col>
-            </b-row>
-            <b-row class="my-1">
-              <b-col cols="4" class="text-right">充值赠送总额：</b-col>
-              <b-col>30</b-col>
-            </b-row>
-            <b-row class="my-1">
-              <b-col cols="4" class="text-right">充值理由备注:</b-col>
-              <b-col>导师但是发送到发送到富商大贾啥的法撒旦法撒旦法</b-col>
-            </b-row>
+            <b-table class="text-left" stacked :items="moneyForm"></b-table>
             <b-btn  class="mt-3" block variant="success" @click="onSumbit()">提交</b-btn>
             
           </b-card>
@@ -48,10 +29,16 @@ export default {
       msg: 'Welcome to Your Vue.js MoneyManagement',
     }
   },
+  computed: {
+    moneyForm () {
+      return this.$store.getters.moneyForm
+    }
+  },
   methods: {
     onSumbit () {
-      console.log('dsd')
-      this.goSuccess()
+      console.log('dsd');
+      this.$store.dispatch('SAVEDATA')
+      // this.goSuccess()
     },
     goSuccess() {
       this.$router.push('/MoneyManagementSuc')

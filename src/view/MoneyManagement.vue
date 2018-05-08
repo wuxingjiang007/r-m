@@ -4,33 +4,33 @@
       <b-row align-v="center" align-content="center" align-h="center">
         <b-col cols="10" sm="8" lg="6">
           <b-form @submit="onSubmit">
-            <b-form-group id="MoneyManagementGroupId"
-                          label="用户懒设计号:"
-                          label-for="MoneyManagementId">
-              <b-form-input id="MoneyManagementId"
-                            type="text"
-                            v-model.trim="form.id"
-                            placeholder="请输入用户懒设计号"
+            <b-form-group v-for="(item, index) in formData"
+                          :key="index"
+                          :label="item.label"
+                          :label-for="item.inputId">
+              <b-form-input :id="item.inputId"
+                            :type="item.type"
+                            v-model.trim="item.value"
+                            :placeholder="item.placeholder"
                             required>
               </b-form-input>
             </b-form-group>
-            <b-form-group id="MoneyManagementGroupMoney"
+            <!-- <b-form-group id="MoneyManagementGroupMoney"
                           label="用户充值实付:"
                           label-for="MoneyManagementMoney">
               <b-form-input id="MoneyManagementMoney"
                             type="number"
-                            v-model.trim="form.moeny"
+                            v-model.trim="form.price"
                             placeholder="请输入用户充值实付金额"
                             required>
               </b-form-input>
             </b-form-group>
             <b-form-group id="MoneyManagementGroupGift"
                           label="用户充值赠送:"
-                          v-model="form.gift"
                           label-for="MoneyManagementGift">
               <b-form-input id="MoneyManagementGift"
                             type="number"
-                            v-model.trim="form.gift"
+                            v-model.trim="form.discountPrice"
                             placeholder="请输入用户充值赠送金额"
                             required>
               </b-form-input>
@@ -41,11 +41,11 @@
               <b-form-textarea  id="MoneyManagementDesc"
                                 :rows="3"
                                 max-rows="6"
-                                v-model.trim="form.desc"
+                                v-model.trim="form.remark"
                                 placeholder="请输入用户充值理由"
                                 required>
               </b-form-textarea>
-            </b-form-group>
+            </b-form-group> -->
             <b-form-group>
               <b-btn type="submit" block variant="primary">下一步</b-btn>
             </b-form-group>
@@ -66,13 +66,13 @@ export default {
   },
   data () {
     return {
-      form: {
-        id: '',
-        money: '',
-        gift: '',
-        desc: '',
-      },
+      
     }
+  },
+  computed: {
+   formData () {
+     return this.$store.state.moneyData
+   }
   },
   methods: {
     nextStep () {
@@ -80,7 +80,7 @@ export default {
     },
     onSubmit (evt) {
       evt.preventDefault();
-      console.log(this.form)
+      this.$store.commit('SETMONEYDATA', this.formData)
       this.nextStep()
     }
   }

@@ -3,7 +3,7 @@
     <canvas class="background"></canvas>
     <div id="app" class="app">
     
-      <Nav :backShow="backShow"/>
+      <Nav v-if="loginState" :backShow="backShow"/>
       <!-- <vue-particles color="#dedede"></vue-particles> -->
       <router-view></router-view>
     </div>
@@ -22,14 +22,30 @@ export default {
   },
   computed: {
     backShow () {
-      console.log(this.$route)
       const noBackUrl = ['Menu', 'MoneyManagementSuc', 'Login', 'CodeManagementSuc']
       const name = this.$route.name
       return !noBackUrl.includes(name)
+    },
+     loginState() {
+      return this.$store.getters.isSign
     }
   },
+   watch: {
+    loginState(val) {
+      if(val) {
+        this.checkMenu()
+      }
+    }
+  },
+  created() {
+    this.$store.dispatch('CHECKSIGN').then(() => {
+
+    }, () => {
+       this.$router.push('/Login')
+    });
+    this.checkMenu()
+  },
   mounted() {
-    console.log(particles.init)
     particles.init({
       selector: '.background',
       maxParticles: 200,
@@ -40,6 +56,12 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
+    }
+  },
+  methods: {
+    checkMenu () {
+      this.$router.push('/Menu')
+      
     }
   }
 }

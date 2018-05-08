@@ -53,7 +53,17 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    noInfo: true
+    noInfo: true,
+    host: 'local.fotor.com.cn',
+    port: 8090,
+    // https: true,
+    proxy: {
+      '/User': {
+        target: 'https://beta.fotor.com.cn',
+        secure: false,
+        changeOrigin: true
+      }
+    }
   },
   performance: {
     hints: false
