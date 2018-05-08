@@ -26,7 +26,7 @@
         </b-form-textarea>
       </b-form-group>
       <b-form-group>
-        <b-btn v-b-modal.modal1 block variant="primary">下一步</b-btn>
+        <b-btn @click="gotoNext" block variant="primary">下一步</b-btn>
       </b-form-group>
     </b-form>
     <b-modal id="modal1" hide-footer title="优惠码生成管理器" ref="modal1">
@@ -107,6 +107,9 @@ export default {
     },
     backMenu () {
       this.$router.push('/Menu')
+    },
+    gotoNext () {
+      this.$router.push('/CodeMangementNext')
     }
   }
 }

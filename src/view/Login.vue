@@ -3,33 +3,33 @@
      <b-container class="bv-example-row">
       <b-row align-h="center">
         <b-col cols="10" sm="8" lg="8">
-          <b-form  @submit="onSubmit" @reset="onReset" v-if="show">
+          <b-form  @submit="onSubmit">
             <b-form-group id="exampleInputGroup1"
                           label="账号:"
                           label-for="exampleInput1"
-                          description="We'll never share your email with anyone else.">
+                          description="">
               <b-form-input id="exampleInput1"
-                            type="email"
-                            v-model="form.email"
+                            type="text"
+                            v-model="form.account"
                             required
-                            placeholder="Enter email">
+                            placeholder="请输入账户">
               </b-form-input>
             </b-form-group>
             <b-form-group id="exampleInputGroup2"
                           label="密码:"
                           label-for="exampleInput2">
               <b-form-input id="exampleInput2"
-                            type="text"
-                            v-model="form.name"
+                            type="password"
+                            v-model="form.password"
                             required
-                            placeholder="Enter name">
+                            placeholder="请输入密码">
               </b-form-input>
             </b-form-group>
             <b-form-group>
-              <b-alert show variant="danger">error</b-alert>
+              <b-alert :show="dangerShow" variant="danger">error</b-alert>
             </b-form-group>
             <b-form-group>
-                <b-button @click="checkMenu" block variant="primary">登陆</b-button>
+                <b-button type="submit" block variant="primary">登陆</b-button>
             </b-form-group>
           </b-form>
         </b-col>
@@ -45,16 +45,11 @@ export default {
   data () {
     return {
       form: {
-        email: '',
-        name: '',
-        food: null,
+        account: '',
+        password: '',
         checked: []
       },
-      foods: [
-        { text: 'Select One', value: null },
-        'Carrots', 'Beans', 'Tomatoes', 'Corn'
-      ],
-      show: true
+      dangerShow: false
     }
   },
   methods: {
@@ -62,20 +57,9 @@ export default {
       evt.preventDefault();
       // alert(JSON.stringify(this.form));
       console.log('//')
-    },
-    onReset (evt) {
-      evt.preventDefault();
-      /* Reset our form values */
-      this.form.email = '';
-      this.form.name = '';
-      this.form.food = null;
-      this.form.checked = [];
-      /* Trick to reset/clear native browser form validation state */
-      this.show = false;
-      this.$nextTick(() => { this.show = true });
+      this.checkMenu()
     },
     checkMenu () {
-      console.log(this.$route);
       this.$router.push('/Menu')
     }
   }
