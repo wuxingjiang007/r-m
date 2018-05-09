@@ -9,6 +9,7 @@ const fetch = (path, data, method = 'post') => {
       if(res.body.code == '000') {
         resolve(res.body)
       } else {
+        console.log(res.body)
         reject(res.body)
       }
     }, reject => {
@@ -20,13 +21,12 @@ const fetch = (path, data, method = 'post') => {
 export function signin () {
   var formData = new FormData();
 
-  formData.append('email', 'lxy_luckysmile@sina.com')
-  formData.append('password', 'lxy654321')
+  formData.append('email', '13658082213@fotor.net.cn')
+  formData.append('password', '8536469')
   return fetch(api.signin, formData)
 }
 
 export function checkSign () {
-
   return fetch(api.getSign + '?_=' + Date.parse(new Date()), {}, 'get')
 }
 
@@ -36,4 +36,16 @@ export function signOut () {
 
 export function saveOrder (data) {
   return fetch(api.saveOrder, data)
+}
+
+export function addCouponCode (data) {
+  return fetch(api.addCouponCode, data)
+}
+
+export function listOrder (data) {
+  return fetch(api.listOrder, data)
+}
+
+export function GetOrderInfo (data) {
+  return fetch(api.getOrderInfo, data)
 }

@@ -3,12 +3,21 @@ import {
   checkSign,
   signOut,
   saveOrder,
+  addCouponCode,
 } from '../api'
 
 export default {
   SIGNIN: ({commit}) => {
-    signin().then(res => {
-      commit('SETUSERS', res.data)
+    return new Promise((resolve, reject) => {
+      signin().then(res => {
+        commit('SETUSERS', res.data)
+        console.log('dsds')
+        resolve()
+      }, res => {
+        console.log('error')
+        console.log(res)
+        reject(res)
+      })
     })
   },
   CHECKSIGN: ({commit}) => {
@@ -35,12 +44,23 @@ export default {
       })
     })
   },
-  SAVEDATA: ({getters}) => {
+  SAVEORDER: ({getters, commit}) => {
     return new Promise((resolve, reject) => {
       saveOrder(getters.sumbitMoneyForm).then(res => {
-        resolve()
-      }, () => {
-        reject()
+        resolve(res)
+      }, (res) => {
+        reject(res)
+        commit('SETAPPERROR', res.msg)
+      })
+    })
+  },
+  SAVECODE: ({getters, commit}) => {
+    return new Promise((resolve, reject) => {
+      addCouponCode(getters.sumbitCodeForm).then(res => {
+        resolve(res)
+      }, res => {
+        reject(res)
+        commit('SETAPPERROR', res.msg)
       })
     })
   }

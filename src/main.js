@@ -8,10 +8,11 @@ import router from './router/index.js'
 
 import {createStore} from './store'
 import App from './App.vue'
-import "bootstrap/dist/css/bootstrap.min.css"
-import "bootstrap-vue/dist/bootstrap-vue.css"
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 import "./assets/common.css"
 
+import "babel-polyfill";
 
 Vue.use(BootstrapVue)
 Vue.use(VueRouter)

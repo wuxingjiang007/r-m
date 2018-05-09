@@ -1,114 +1,114 @@
 <template>
   <div id="CodeManagement" class="center-center">
-    <b-form class="col-xs-12 col-sm-8 col-md-6">
-      <b-form-group id="MoneyManagementGroup1"
-                    label="优惠码优惠额度及数量:"
-                    label-for="MoneyManagementInput1">
-        <b-form-input id="MoneyManagementInput1"
-                      requird>
-        </b-form-input>
-      </b-form-group>
-      <b-form-group id="MoneyManagementGroup1"
-                    label="优惠码有效起止日期选择:"
-                    label-for="MoneyManagementInput1">
-        <b-form-input id="MoneyManagementInput1"
-                      requird>
-        </b-form-input>
-      </b-form-group>
-  
-      <b-form-group id="MoneyManagementGroup1"
-                    label="优惠码申请备注:"
-                    label-for="MoneyManagementInput1">
-        <b-form-textarea  id="MoneyManagementInput1"
-                          :rows="3"
-                          max-rows="6"
-                          requird>
-        </b-form-textarea>
-      </b-form-group>
+    <b-form @submit="sumbit" class="col-xs-12 col-sm-8 col-md-6">
+      <template v-for="(item, index) in formData">
+        <b-form-group v-if="item.inputType == 'input'"
+                      :key="index"
+                      :label="item.label"
+                      :description="item.description"
+                      :label-for="item.inputId">
+          <b-form-input :id="item.inputId"
+                        :type="item.type"
+                        v-model.trim="item.value"
+                        :placeholder="item.placeholder"
+                        required>
+          </b-form-input>
+          
+        </b-form-group>
+        <b-form-group v-else-if="item.inputType == 'inputGroup'"
+                      :key="index"
+                      :label="item.label"
+                      :description="item.description"
+                      :label-for="item.inputId">
+          <b-input-group :append="item.unit">
+            <b-form-input :id="item.inputId"
+                        :type="item.type"
+                        v-model.trim="item.value"
+                        :placeholder="item.placeholder"
+                        required>
+            </b-form-input>
+          </b-input-group>
+        </b-form-group>
+        <b-form-group v-else-if="item.inputType == 'datepicker'"
+                      :key="index"
+                      :label="item.label"
+                      :description="item.description"
+                      :label-for="item.inputId">
+            <b-row>
+              <b-col cols="5" >
+                <datepicker v-model="item.value.start"
+                            :placeholder="'开始时间'"
+                            :language="zh"
+                            :format="format" 
+                            :bootstrap-styling="true"
+                            class="datepicker"
+                            required
+                            name="datepickerStart"></datepicker>
+              </b-col>
+              <b-col class="text-center" cols="2">
+                至
+              </b-col>
+              <b-col cols="5" >
+                <datepicker class="datepicker"
+                            :placeholder="'结束时间'"
+                            :language="zh"
+                            :bootstrap-styling="true"
+                            :format="format"
+                            required
+                            v-model="item.value.end" 
+                            name="datepickerEnd"></datepicker>
+              </b-col>
+            </b-row>
+          </b-form-group>
+          <b-form-group v-else-if="item.inputType == 'textarea'"
+                        :key="index"
+                        :label="item.label"
+                        :description="item.description"
+                        :label-for="item.inputId">
+            <b-form-textarea  :id="item.inputId"
+                              :rows="3"
+                              max-rows="6"
+                              v-model.trim="item.value"
+                              :placeholder="item.placeholder"
+                              required>
+            </b-form-textarea>
+          </b-form-group>
+        </template>
       <b-form-group>
-        <b-btn @click="gotoNext" block variant="primary">下一步</b-btn>
+        <b-btn type="sumbit"  block variant="primary">下一步</b-btn>
       </b-form-group>
     </b-form>
-    <b-modal id="modal1" hide-footer title="优惠码生成管理器" ref="modal1">
-      <p class="my-1">请确认下方充值信息，确认无误后点击提交执行操作</p>
-      <b-row>
-        <b-col>优惠码金额：</b-col>
-        <b-col>xxxxxxxxxx</b-col>
-      </b-row>
-        <b-row>
-        <b-col>优惠码金额：</b-col>
-        <b-col>xxxxxxxxxx</b-col>
-      </b-row>
-        <b-row>
-        <b-col>优惠码金额：</b-col>
-        <b-col>xxxxxxxxxx</b-col>
-      </b-row>
-        <b-row>
-        <b-col>优惠码金额：</b-col>
-        <b-col>xxxxxxxxxx</b-col>
-      </b-row>
-        <b-row>
-        <b-col>优惠码金额：</b-col>
-        <b-col>xxxxxxxxxx</b-col>
-      </b-row>
-      <b-btn  class="mt-3" block variant="outline-success" @click="sumbitForm">提交</b-btn>
-    </b-modal>
-    <b-modal id="modal2" hide-footer title="优惠码生成管理器" ref = "modal2">
-      <p class="my-1">优惠码已生成， 处理单号：1234567890</p>
-      <b-row>
-        <b-col>优惠码金额：</b-col>
-        <b-col>xxxxxxxxxx</b-col>
-      </b-row>
-        <b-row>
-        <b-col>优惠码金额：</b-col>
-        <b-col>xxxxxxxxxx</b-col>
-      </b-row>
-        <b-row>
-        <b-col>优惠码金额：</b-col>
-        <b-col>xxxxxxxxxx</b-col>
-      </b-row>
-        <b-row>
-        <b-col>优惠码金额：</b-col>
-        <b-col>xxxxxxxxxx</b-col>
-      </b-row>
-        <b-row>
-        <b-col>优惠码金额：</b-col>
-        <b-col>xxxxxxxxxx</b-col>
-      </b-row>
-      <b-btn  class="mt-3" block variant="outline-success" @click="backMenu">查看优惠码</b-btn>
-      <b-btn  class="mt-3" block variant="outline-success" @click="backMenu">返回首页</b-btn>
-    </b-modal>
   </div>
   
 </template>
 
 <script>
-
+import Datepicker from 'vuejs-datepicker' // 日期选择插件
+import {zh} from 'vuejs-datepicker/dist/locale' // 日期插件语言设置
 
 export default {
   name: 'CodeManagement',
   components: {
+    Datepicker,
   },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js CodeManagement'
+      format: 'yyyy-MM-dd',
+      zh,
     }
   },
+   computed: {
+   formData () {
+     return this.$store.state.codeData
+   }
+  },
   methods: {
-    sumbitForm () {
-      this.hideModal('modal1');
-      this.showModal('modal2')
-    },
-    showModal (ref) {
-      this.$refs[ref].show()
-    },
-    hideModal (ref) {
-      this.$refs[ref].hide()
-    },
-    backMenu () {
-      this.$router.push('/Menu')
+    sumbit (evt) {
+      evt.preventDefault(); // 阻默认事件
+      this.gotoNext()
     },
     gotoNext () {
+      this.$store.commit('SETCODEDATA', this.formData)
       this.$router.push('/CodeMangementNext')
     }
   }
@@ -116,5 +116,9 @@ export default {
 </script>
 
 <style lang="scss">
-
+  .datepicker {
+    input {
+      width: 100%;
+    }
+  }
 </style>

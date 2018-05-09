@@ -4,17 +4,34 @@
       <b-row align-v="center" align-content="center" align-h="center">
         <b-col cols="10" sm="8" lg="6">
           <b-form @submit="onSubmit">
-            <b-form-group v-for="(item, index) in formData"
-                          :key="index"
-                          :label="item.label"
-                          :label-for="item.inputId">
-              <b-form-input :id="item.inputId"
-                            :type="item.type"
-                            v-model.trim="item.value"
-                            :placeholder="item.placeholder"
-                            required>
-              </b-form-input>
-            </b-form-group>
+            <template v-for="(item, index) in formData">
+              <b-form-group v-if="item.inputType == 'input'"
+                            :key="index"
+                            :label="item.label"
+                            :description="item.description"
+                            :label-for="item.inputId">
+                <b-form-input :id="item.inputId"
+                              :type="item.type"
+                              v-model.trim="item.value"
+                              :placeholder="item.placeholder"
+                              required>
+                </b-form-input>
+              </b-form-group>
+              <b-form-group v-else-if="item.inputType == 'textarea'"
+                            :key="index"
+                            :label="item.label"
+                            :description="item.description"
+                            :label-for="item.inputId">
+                  <b-form-textarea  :id="item.inputId"
+                                    :rows="3"
+                                    max-rows="6"
+                                    v-model.trim="item.value"
+                                    :placeholder="item.placeholder"
+                                    required>
+                  </b-form-textarea>
+                </b-form-group>
+              </template>
+            
             <!-- <b-form-group id="MoneyManagementGroupMoney"
                           label="用户充值实付:"
                           label-for="MoneyManagementMoney">

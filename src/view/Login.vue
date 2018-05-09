@@ -26,7 +26,7 @@
               </b-form-input>
             </b-form-group>
             <b-form-group>
-              <b-alert :show="dangerShow" variant="danger">error</b-alert>
+              <b-alert :show="dangerShow" variant="danger">{{errorMsg}}</b-alert>
             </b-form-group>
             <b-form-group>
                 <b-button type="submit" block variant="primary">登陆</b-button>
@@ -47,21 +47,40 @@ export default {
       form: {
         account: '',
         password: '',
-        checked: []
       },
-      dangerShow: false
+      dangerShow: false,
+      errorMsg: '',
     }
   },
   computed: {
    
   },
+  watch: {
+    form: {
+      deep: true,
+      handler () {
+        this.dangerShow = false
+      }
+    }
+  },
   methods: {
     onSubmit (evt) {
       evt.preventDefault();
       // alert(JSON.stringify(this.form));
-      console.log(this.$store)
-      this.$store.dispatch('SIGNIN')
+      this.$store.dispatch('SIGNIN').then(res => { 
+      }, res => {
+        this.errorInfo(res)
+      })
       // this.checkMenu()
+    },
+    errorInfo(data) {
+      if(data.code == '119') {
+        this.errorMsg = '账号或者密码错误'
+      } else {
+        this.errorMsg = data.msg
+      }
+
+      this.dangerShow = true
     }
   },
  
