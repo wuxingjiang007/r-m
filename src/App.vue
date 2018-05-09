@@ -1,13 +1,13 @@
 <template>
   <div>
-    
+
     <canvas class="background"></canvas>
     <div id="app" class="app">
       <div class="alert-group">
-          <b-alert  
+          <b-alert
                   v-for="(item,index) in appError"
                   :key="index"
-                  :show="show" 
+                  :show="show"
                   dismissible
                   variant="warning"
                   @dismissed="item.dismissed"
@@ -21,10 +21,12 @@
         </b-alert>
       </div>
       <Nav v-if="loginState" :backShow="backShow"/>
-      <router-view></router-view>
+      <b-container class="justify-content-center">
+        <router-view></router-view>
+      </b-container>
     </div>
   </div>
-  
+
 </template>
 
 <script>
@@ -43,7 +45,8 @@ export default {
       return !noBackUrl.includes(name)
     },
     loginState() {
-    return this.$store.getters.isSign
+    // return this.$store.getters.isSign
+    return true
     },
     show () {
       return !!this.appError ? 10 : 0;
@@ -102,9 +105,6 @@ export default {
 </script>
 
 <style lang="scss">
-  html, body, #app {
-    min-height: 100%;
-  } 
   .background {
     position: absolute;
     display: block;
@@ -119,4 +119,24 @@ export default {
     width: 100%;
     z-index: 999;
   }
+  /* 超小屏幕（手机，小于 768px） */
+  @media (max-width: 768px) {
+    .vdp-datepicker__calendar {
+      position: fixed !important;
+      top: 0;
+      left: 0;
+      margin: auto;
+    }
+   }
+  /* 小屏幕（平板，大于等于 768px） */
+  @media (min-width: 768px) {
+
+  }
+
+  /* 中等屏幕（桌面显示器，大于等于 992px） */
+  @media (min-width: 992px) {  }
+
+  /* 大屏幕（大桌面显示器，大于等于 1200px） */
+  @media (min-width: 1200px) {  }
+
 </style>

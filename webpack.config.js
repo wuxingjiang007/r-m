@@ -54,8 +54,8 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     noInfo: true,
-    host: 'local.fotor.com.cn',
-    port: 8090,
+    // host: 'local.fotor.com.cn',
+    port: 9898,
     // https: true,
     proxy: {
       '/User': {

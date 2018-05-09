@@ -8,15 +8,15 @@
         <b-tab title="全部优惠码" active>
           <b-form-select v-model="selected" :options="options" class="mb-3" />
 
-          <b-table striped hover :items="items"></b-table>
+          <b-table :stacked="stacked" striped hover :items="items"></b-table>
         </b-tab>
         <b-tab title="我的优惠码">
            <b-form-select v-model="selected" :options="options" class="mb-3" />
-          <b-table striped hover :items="items"></b-table>
+          <b-table :stacked="stacked" striped hover :items="items"></b-table>
         </b-tab>
         <b-tab title="已使用优惠码">
            <b-form-select v-model="selected" :options="options" class="mb-3" />
-          <b-table striped hover :items="items"></b-table>
+          <b-table :stacked="stacked" striped hover :items="items"></b-table>
         </b-tab>
       </b-tabs>
     </b-card>
@@ -26,10 +26,10 @@
 </template>
 <script>
 const items = [
-  { isActive: true, age: 40, first_name: 'Dickerson', last_name: 'Macdonald' },
-  { isActive: false, age: 21, first_name: 'Larsen', last_name: 'Shaw' },
-  { isActive: false, age: 89, first_name: 'Geneva', last_name: 'Wilson' },
-  { isActive: true, age: 38, first_name: 'Jami', last_name: 'Carney' }
+  {'单号': '1234560', '类型': '优惠码1', '申请人': '张三', '申请日期': '20180322', '申请理由备注': 'xiiosihfiosfhsodihfisohdf'},
+  {'单号': '1234560', '类型': '优惠码2', '申请人': '张三', '申请日期': '20180322', '申请理由备注': 'xiiosihfiosfhsodihfisohdf'},
+  {'单号': '1234560', '类型': '优惠码1', '申请人': '张三', '申请日期': '20180322', '申请理由备注': 'xiiosihfiosfhsodihfisohdf'},
+  {'单号': '1234560', '类型': '优惠码2', '申请人': '张三', '申请日期': '20180322', '申请理由备注': 'xiiosihfiosfhsodihfisohdf'},
 ]
 
 export default {
@@ -45,6 +45,14 @@ export default {
         { value: 'd', text: 'This one is disabled', disabled: true }
       ],
       items
+    }
+  },
+  created() {
+    console.log(this)
+  },
+  computed: {
+    stacked() {
+      return this.isMobile
     }
   }
 }

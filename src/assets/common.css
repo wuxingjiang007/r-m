@@ -1,11 +1,4 @@
-.center-center {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+
 
 a:hover {
   text-decoration: none;
@@ -14,5 +7,5 @@ a:hover {
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button{
     -webkit-appearance: none !important;
-    margin: 0; 
+    margin: 0;
 }

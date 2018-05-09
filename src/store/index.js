@@ -23,22 +23,24 @@ export function createStore () {
           description: "也许是手机号、邮箱、或者fotorToken"
         },
         {
-          inputType: 'input',
+          inputType: 'inputGroup',
           label:"用户充值实付:",
           inputId: 'MoneyManagementMoney',
           type: 'number',
           value: '',
           placeholder:"请输入充值实付金额",
-          description: ""
+          description: "",
+          unit: '元'
         },
         {
-          inputType: 'input',
+          inputType: 'inputGroup',
           label:"用户充值赠送:",
           inputId: 'MoneyManagementGift',
           type: 'number',
           value: '',
           placeholder:"请输入充值赠送金额",
-          description: ""
+          description: "",
+          unit: '元'
         },
         {
           inputType: 'textarea',
@@ -71,7 +73,7 @@ export function createStore () {
           description: "",
           unit: '个'
         },
-        { 
+        {
           inputType: 'datepicker',
           label:"优惠码有效起止日期:",
           inputId: 'MoneyManagementMoney',
@@ -83,7 +85,7 @@ export function createStore () {
           placeholder:"请输入充值实付金额",
           description: ""
         },
-        { 
+        {
           inputType: 'textarea',
           label:"优惠码申请备注:",
           inputId: 'MoneyManagementGift',

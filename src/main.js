@@ -4,7 +4,9 @@ import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 import Vuex from 'vuex'
 
+
 import router from './router/index.js'
+import browser from './assets/browser.js'
 
 import {createStore} from './store'
 import App from './App.vue'
@@ -19,6 +21,14 @@ Vue.use(VueRouter)
 Vue.use(VueResource)
 
 const store = createStore()
+
+Vue.mixin({
+  data () {
+    return {
+      isMobile: new browser().device == 'Mobile'
+    }
+  }
+})
 
 new Vue({
   router,
