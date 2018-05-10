@@ -4,25 +4,28 @@ import api from './create-api.js'
 const vue = new Vue;
 
 const fetch = (path, data, method = 'post') => {
+  let loader = vue.$loading.show()
+  console.log(vue.$loading)
   return new Promise((resolve, reject) => {
     if(Object.prototype.toString.call(data) !== '[object FormData]') {
       data = {params: data}
     }
     vue.$http[method](path, data).then(res => {
+      loader.hide()
       if(res.body.code == '000') {
         resolve(res.body)
       } else {
         reject(res.body)
       }
     }, res => {
-      console.log(res)
+      loader.hide()
       reject(res.body)
     })
   })
 }
 
 export function signin (data) {
-  
+
   return fetch(api.signin, data)
 }
 

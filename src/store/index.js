@@ -53,7 +53,7 @@ const getcodeData =  () => {
     {
       inputType: 'inputGroup',
       label:"优惠码优惠额度:",
-      inputId: '200',
+      inputId: 'codeManagementId',
       type: 'number',
       value: '',
       placeholder:"请输入优惠金额",
@@ -92,7 +92,7 @@ const getcodeData =  () => {
       description: ""
     },
   ]
-  
+
 }
 export function createStore () {
   return new Vuex.Store( {

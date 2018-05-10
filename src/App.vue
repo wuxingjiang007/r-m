@@ -78,9 +78,32 @@ export default {
   mounted() {
     particles.init({
       selector: '.background',
-      maxParticles: 200,
-      color:['red', 'blue'],
-      // connectParticles: true
+      color:['#011935', '#00343f', '#1db0b8', '#37c6c0'],
+      maxParticles: 150,
+      connectParticles: true,
+      responsive: [
+                    {
+                      breakpoint: 768,
+                      options: {
+                        maxParticles: 100,
+                      }
+                    },
+                    {
+                      breakpoint: 420,
+                      options: {
+                        maxParticles: 50,
+                        connectParticles: false,
+                        color: '#00343f',
+                      }
+                    },
+                    {
+                      breakpoint: 320,
+                      options: {
+                        maxParticles: 30,
+                        color: '#00343f',
+                                       }
+                    }
+                  ]
     })
   },
   data () {

@@ -1,5 +1,5 @@
 <template>
-  <div id="Form">
+  <div>
     <b-form-group v-if="formData.inputType == 'input'"
                   :label="formData.label"
                   :description="formData.description"

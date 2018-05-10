@@ -35,7 +35,7 @@
         </b-col>
       </b-row>
     </b-container>
-    
+
   </div>
 </template>
 
@@ -53,7 +53,7 @@ export default {
     }
   },
   computed: {
-   
+
   },
   watch: {
     form: {
@@ -67,8 +67,9 @@ export default {
     onSubmit (evt) {
       evt.preventDefault();
       // alert(JSON.stringify(this.form));
-      this.$store.dispatch('SIGNIN', this.form).then(res => { 
+      this.$store.dispatch('SIGNIN', this.form).then(res => {
       }, res => {
+        console.log(res)
         this.errorInfo(res)
       })
       // this.checkMenu()
@@ -83,10 +84,10 @@ export default {
       this.dangerShow = true
     }
   },
- 
+
 }
 </script>
 
 <style lang="scss">
- 
+
 </style>

@@ -4,17 +4,17 @@
       <b-row align-v="center" align-content="center" align-h="center">
         <b-col cols="11" sm="11" lg="8">
            <b-card title="优惠码生成"
-                  class="text-center" 
+                  class="text-center"
                   bg-variant="Light" >
             <b-alert show class="text-left">充值处理成功</b-alert>
             <b-row class="text-left" :key="index" v-for="(item, index) in formData">
               <b-col cols="12" sm="6">
                 {{item.label}}
-              </b-col> 
-              <b-col v-if="typeof item.value === 'object'" cols="12" sm="6" class="text-info">
-                {{item.value.start}}-{{item.value.end}}
               </b-col>
-              <b-col cols="12" sm="6" class="text-info">
+              <b-col v-if="typeof item.value === 'object'" cols="12" sm="6" class="text-info">
+                {{dateFormat(item.value.start)}}/{{dateFormat(item.value.end)}}
+              </b-col>
+              <b-col v-else cols="12" sm="6" class="text-info">
                 {{item.value}}{{item.unit}}
               </b-col>
             </b-row>
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-
+import {dateFormat} from '../assets/common'
 
 export default {
   name: 'CodeManagementSuc',
@@ -51,7 +51,8 @@ export default {
     checkCodeRecord () {
       this.$store.commit('RESETCODEDATA')
       this.$router.push('/CodeRecord')
-    }
+    },
+    dateFormat
   }
 }
 </script>

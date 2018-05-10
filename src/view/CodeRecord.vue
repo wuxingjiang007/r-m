@@ -7,7 +7,7 @@
       <b-tabs card v-model="tabIndex">
         <b-tab title="全部优惠码" active>
           <b-form-select v-model="useStatus" :options="options" class="mb-3" />
-          <b-table responsive  :stacked="stacked" striped hover :items="lists">
+          <b-table :fields="fields"  :stacked="stacked" striped hover :items="lists">
             <template slot="操作" slot-scope="row">
               <!-- We use @click.stop here to prevent a 'row-clicked' event from also happening -->
               <b-button size="sm" @click.stop="info(row.item, row.index, $event.target)" class="mr-1">
@@ -21,7 +21,7 @@
         </b-tab>
         <b-tab title="我的优惠码">
            <b-form-select  v-model="useStatus" :options="options" class="mb-3" />
-          <b-table responsive  :stacked="stacked" striped hover :clicked="toDetail" :items="lists">
+          <b-table :fields="fields"  :stacked="stacked" striped hover :clicked="toDetail" :items="lists">
             <template slot="操作" slot-scope="row">
               <!-- We use @click.stop here to prevent a 'row-clicked' event from also happening -->
               <b-button size="sm" @click.stop="info(row.item, row.index, $event.target)" class="mr-1">
@@ -60,6 +60,7 @@ export default {
   },
   data () {
     return {
+      fields:['优惠码', '类型', '申请人','优惠码日期', '使用情况', '操作'],
       tabIndex: 0,
       selected: null,
       useStatus: '-1',
@@ -97,14 +98,14 @@ export default {
     }
   },
   created() {
-    
+
   },
   mounted () {
     console.log(this.$refs.infiniteLoading)
   },
   methods: {
     info (item, index, button) {
-      
+
       console.log(item)
       this.$store.dispatch('GETCOUPONDETAIL', {id:item.id}).then(res => {
         console.log(res);
@@ -127,14 +128,14 @@ export default {
       this.modalInfo.title = ''
       this.modalInfo.content = ''
     },
-    getList(infinite) {      
+    getList(infinite) {
       this.$store.dispatch('GETLISTCOUPON', this.couponState).then(res => {
         this.$store.commit('CONCATLISTCOUPON', res.data)
           infinite.loaded()
           if(this.lists.length % 10 != 0 || this.lists.length == 0) {
            infinite.complete();
           }
-          
+
       })
     },
     infiniteHandler($state) {

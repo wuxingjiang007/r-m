@@ -42,7 +42,7 @@ export default {
     state.orderRecordList = state.orderRecordList.concat(data)
   },
   CLEARLISTORDER: (state) => {
-    state.couponRecordList = []
+    state.orderRecordList = []
   },
   RESETMONEYDATA: (state) => {
     state.moneyData = state.initMoneyData

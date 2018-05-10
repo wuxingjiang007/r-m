@@ -9,8 +9,11 @@
           <b-row class="text-left" :key="index" v-for="(item, index) in formData">
               <b-col cols="12" sm="6">
                 {{item.label}}
-              </b-col> 
-              <b-col cols="12" sm="6" class="text-info">
+              </b-col>
+              <b-col v-if="typeof item.value === 'object'" cols="12" sm="6" class="text-info">
+                {{dateFormat(item.value.start)}}/{{dateFormat(item.value.end)}}
+              </b-col>
+              <b-col v-else cols="12" sm="6" class="text-info">
                 {{item.value}}{{item.unit}}
               </b-col>
             </b-row>
@@ -22,7 +25,7 @@
 </template>
 
 <script>
-
+import {dateFormat} from '../assets/common'
 
 export default {
   name: 'CodeMangementNext',
@@ -40,15 +43,14 @@ export default {
   },
   methods: {
     onSumbit () {
-      console.log('dsd')
-      // this.goSuccess()
       this.$store.dispatch('SAVECODE').then(res => {
         this.goSuccess()
       })
     },
     goSuccess() {
       this.$router.push('/CodeManagementSuc')
-    }
+    },
+    dateFormat,
   }
 }
 </script>

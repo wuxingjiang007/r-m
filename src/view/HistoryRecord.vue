@@ -6,7 +6,7 @@
         </template>
       <b-tabs card v-model="tabIndex">
         <b-tab title="全部历史记录" active>
-          <b-table responsive  :stacked="stacked" striped hover :items="lists">
+          <b-table :stacked="stacked" outlined  :items="lists">
             <template slot="操作" slot-scope="row">
               <!-- We use @click.stop here to prevent a 'row-clicked' event from also happening -->
               <b-button size="sm" @click.stop="info(row.item, row.index, $event.target)" class="mr-1">
@@ -16,7 +16,7 @@
           </b-table>
         </b-tab>
         <b-tab title="我的历史记录">
-          <b-table responsive  :stacked="stacked" striped hover :items="lists">
+          <b-table  :stacked="stacked" outlined :items="lists">
             <template slot="操作" slot-scope="row">
               <!-- We use @click.stop here to prevent a 'row-clicked' event from also happening -->
               <b-button size="sm" @click.stop="info(row.item, row.index, $event.target)" class="mr-1">
@@ -55,7 +55,7 @@ export default {
   },
   computed :{
     // int pageNo(必须传递), int pageSize(必须传递),fotorToken(当前登录用户的fotorToken)
-    couponState () {
+    historyState () {
       return {
         pageNo: 1,
         pageSize: 10,
@@ -71,17 +71,14 @@ export default {
   },
   watch: {
     tabIndex () {
-      this.checkList()
-    },
-    useStatus () {
+      console.log('??')
       this.checkList()
     }
   },
   created() {
-    
+
   },
   mounted () {
-    console.log(this.$refs.infiniteLoading)
   },
   methods: {
     info (item, index, button) {
@@ -104,15 +101,15 @@ export default {
       this.modalInfo.title = ''
       this.modalInfo.content = ''
     },
-    getList(infinite) {      
-      this.$store.dispatch('GETLISTORDER', this.couponState).then(res => {
+    getList(infinite) {
+      this.$store.dispatch('GETLISTORDER', this.historyState).then(res => {
         console.log(res)
         this.$store.commit('CONCATLISTORDER', res.data)
           infinite.loaded()
           if(this.lists.length % 10 != 0 || this.lists.length == 0) {
            infinite.complete();
           }
-          
+
       })
     },
     infiniteHandler($state) {
@@ -120,11 +117,8 @@ export default {
     },
     checkList () {
       this.$nextTick(() => {
-        setTimeout(() => {
-          this.$store.commit('CLEARLISTORDER');
-          this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
-          
-        }, 0)
+        this.$store.commit('CLEARLISTORDER');
+        this.$refs.infiniteLoading.$emit('$InfiniteLoading:reset');
       })
     }
   }
