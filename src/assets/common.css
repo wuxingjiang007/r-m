@@ -9,3 +9,7 @@ input::-webkit-inner-spin-button{
     -webkit-appearance: none !important;
     margin: 0;
 }
+
+div {
+  word-break:break-all;
+}

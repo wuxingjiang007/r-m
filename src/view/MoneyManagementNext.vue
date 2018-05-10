@@ -8,12 +8,12 @@
                   bg-variant="Light">
             <b-alert show class="text-left">充值确认，请确认下方充值信息，确认无误后点击提交执行操作</b-alert>
             <!-- <b-table class="text-left" stacked :items="formData"></b-table> -->
-            <b-row class="text-left" v-for="item in formData">
-              <b-col cols="12">
+            <b-row class="text-left" :key="index" v-for="(item, index) in formData">
+              <b-col cols="12" sm="6">
                 {{item.label}}
-              </b-col>
-              <b-col cols="12" class="text-info">
-                {{item.value}}
+              </b-col> 
+              <b-col cols="12" sm="6" class="text-info">
+                {{item.value}}{{item.unit}}
               </b-col>
             </b-row>
             <b-btn  class="mt-3" block variant="success" @click="onSumbit()">提交</b-btn>

@@ -1,3 +1,5 @@
+import {dateFormat} from '../assets/common.js'
+
 function strMapToObj(strMap) {
   let obj = Object.create(null);
   for (let [k,v] of strMap) {
@@ -16,10 +18,9 @@ function getForm(data) {
       
       for (let p in item.value) {
         if(Object.prototype.toString.call(item.value[p]) == "[object Date]" ){
-          item.value[p] = dateFormat(item.value[p])
+          item.value[p] = dateFormat(item.value[p], 'yyyy-MM-dd 00:00:00')
         }
       }
-      console.log(Object.values(item.value))
       m.set(item.label, Object.values(item.value).join('至'))
     } else {
       m.set(item.label, item.value)
@@ -29,24 +30,7 @@ function getForm(data) {
   return [strMapToObj(m)];
 }
 
-const dateFormat = function(date, fmt = 'yyyy-MM-dd')   
-  { //author: meizz   
-    var o = {   
-      "M+" : date.getMonth()+1,                 //月份   
-      "d+" : date.getDate(),                    //日   
-      // "h+" : date.getHours(),                   //小时   
-      // "m+" : date.getMinutes(),                 //分   
-      // "s+" : date.getSeconds(),                 //秒   
-      "q+" : Math.floor((date.getMonth()+3)/3), //季度   
-      "S"  : date.getMilliseconds()             //毫秒   
-    };   
-    if(/(y+)/.test(fmt))   
-      fmt=fmt.replace(RegExp.$1, (date.getFullYear()+"").substr(4 - RegExp.$1.length));   
-    for(var k in o)   
-      if(new RegExp("("+ k +")").test(fmt))   
-    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));   
-    return fmt + ' 00:00:00';   
-  }  
+
 
 export default {
   isSign (state) {
@@ -72,7 +56,7 @@ export default {
   },
   sumbitCodeForm (state) {
    // amount(金额,必须传递),count(个数,必须传递),createTime和endTime(必须传递),remark可传可不传
-    var data = state.moneyData.map( ({value}) => (value));
+    var data = state.codeData.map( ({value}) => (value));
     var formData = new FormData();
 
     formData.append('amount', data[0])
@@ -82,5 +66,44 @@ export default {
     formData.append('remark', data[3])
 
     return formData;
+  },
+  couponLists (state) {
+    return state.couponRecordList.map(({
+      id,
+      code,
+      createTime,
+      creator,
+      usedTimes,
+      expiredDate,
+      subscriptPackages}) => {
+      return {
+        'id': id,
+        '优惠码': code,
+        '类型': subscriptPackages + '元',
+        '申请人': creator,
+        '优惠码日期': dateFormat(new Date(createTime), 'yyyy/MM/dd') + '-' + dateFormat(new Date(expiredDate), 'yyyy/MM/dd'),
+        '使用情况': usedTimes + '次',
+        '操作': ''
+
+      }
+    })
+    
+  },
+  orderLists (state) {
+    return state.orderRecordList.map(({
+      orderId,
+      addressId,
+      createTime,
+      printWork,
+      }) => {
+      return {
+        '单号': orderId,
+        '申请人': addressId,
+        '优惠码日期':createTime,
+        '申请理由': printWork,
+        '操作':''
+      }
+    })
+    
   }
 }

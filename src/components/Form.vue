@@ -84,7 +84,6 @@
       }
     },
     created() {
-      console.log(this.formData)
     }
   }
 </script>

@@ -5,25 +5,25 @@ const vue = new Vue;
 
 const fetch = (path, data, method = 'post') => {
   return new Promise((resolve, reject) => {
+    if(Object.prototype.toString.call(data) !== '[object FormData]') {
+      data = {params: data}
+    }
     vue.$http[method](path, data).then(res => {
       if(res.body.code == '000') {
         resolve(res.body)
       } else {
-        console.log(res.body)
         reject(res.body)
       }
-    }, reject => {
+    }, res => {
+      console.log(res)
       reject(res.body)
     })
   })
 }
 
-export function signin () {
-  var formData = new FormData();
-
-  formData.append('email', '13658082213@fotor.net.cn')
-  formData.append('password', '8536469')
-  return fetch(api.signin, formData)
+export function signin (data) {
+  
+  return fetch(api.signin, data)
 }
 
 export function checkSign () {
@@ -42,10 +42,22 @@ export function addCouponCode (data) {
   return fetch(api.addCouponCode, data)
 }
 
-export function listOrder (data) {
-  return fetch(api.listOrder, data)
+export function getListOrder (data) {
+  return fetch(api.listOrder, data, 'get')
 }
 
 export function GetOrderInfo (data) {
   return fetch(api.getOrderInfo, data)
+}
+
+export function getListCouponCode (data) {
+  return fetch(api.listCouponCode, data, 'get')
+}
+
+export function getCouponDetail (data) {
+  return fetch(api.findCouponCode, data, 'get')
+}
+export function getOrderDetail (data) {
+  return fetch(api.getOrderInfo, data, 'get')
+
 }

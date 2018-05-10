@@ -25,5 +25,29 @@ export default {
   },
   SETORDERNO: (state, data) => {
     state.orderNo = data
+  },
+  CLEARLISTCOUPON: (state) => {
+    state.couponRecordList = []
+  },
+  CONCATLISTCOUPON: (state, data) => {
+    state.couponRecordList = state.couponRecordList.concat(data)
+  },
+  SETCOUPONPAGENO: (state, page) => {
+    state.couponState.pageNo = page
+  },
+  SETCOUPONEMAIL: (state, email) => {
+    state.couponState.email = email
+  },
+  CONCATLISTORDER: (state, data) => {
+    state.orderRecordList = state.orderRecordList.concat(data)
+  },
+  CLEARLISTORDER: (state) => {
+    state.couponRecordList = []
+  },
+  RESETMONEYDATA: (state) => {
+    state.moneyData = state.initMoneyData
+  },
+  RESETCODEDATA: (state) => {
+    state.codeData = state.initCodeData
   }
 }

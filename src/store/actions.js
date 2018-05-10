@@ -4,18 +4,27 @@ import {
   signOut,
   saveOrder,
   addCouponCode,
+  getListCouponCode,
+  getListOrder,
+  getCouponDetail,
+  getOrderDetail,
 } from '../api'
 
+import {
+  getEmail
+} from '../assets/common'
+
 export default {
-  SIGNIN: ({commit}) => {
+  SIGNIN: ({commit}, data) => {
     return new Promise((resolve, reject) => {
-      signin().then(res => {
+      var formData = new FormData();
+
+      formData.append('email', getEmail(data.account))
+      formData.append('password', data.password)
+      signin(formData).then(res => {
         commit('SETUSERS', res.data)
-        console.log('dsds')
         resolve()
       }, res => {
-        console.log('error')
-        console.log(res)
         reject(res)
       })
     })
@@ -60,6 +69,44 @@ export default {
         resolve(res)
       }, res => {
         reject(res)
+        commit('SETAPPERROR', res.msg)
+      })
+    })
+  },
+  GETLISTCOUPON: ({getters, commit}, data) => {
+    return new Promise((resolve, reject) => {
+      getListCouponCode(data).then(res => {
+        resolve(res)
+      }, res => {
+        // reject(res)
+        commit('SETAPPERROR', res.msg)
+      })
+    })
+  },
+  GETLISTORDER: ({getters, commit}, data) => {
+    return new Promise((resolve, reject) => {
+      getListOrder(data).then(res=> {
+        resolve(res)
+      }, res => {
+        commit('SETAPPERROR', res.msg)
+      })
+    })
+    
+  },
+  GETCOUPONDETAIL: ({commit}, data) => {
+    return new Promise((resolve, reject) => {
+      getCouponDetail(data).then(res=> {
+        resolve(res)
+      }, res => {
+        commit('SETAPPERROR', res.msg)
+      })
+    })
+  },
+  GETORDERDETAIL: ({commit}, data) => {
+    return new Promise((resolve, reject) => {
+      getOrderDetail(data).then(res=> {
+        resolve(res)
+      }, res => {
         commit('SETAPPERROR', res.msg)
       })
     })

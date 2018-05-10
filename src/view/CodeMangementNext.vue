@@ -6,7 +6,14 @@
                 bg-variant="Light"
                 title="优惠码生成管理">
           <b-alert show class="text-left">优惠码生成确认，请确认下方信息，确认无误后点击提交执行操作</b-alert>
-          <b-table class="text-left" stacked :items="formData"></b-table>
+          <b-row class="text-left" :key="index" v-for="(item, index) in formData">
+              <b-col cols="12" sm="6">
+                {{item.label}}
+              </b-col> 
+              <b-col cols="12" sm="6" class="text-info">
+                {{item.value}}{{item.unit}}
+              </b-col>
+            </b-row>
           <b-btn  class="mt-3" block variant="success" @click="onSumbit()">提交</b-btn>
         </b-card>
       </b-col>
@@ -28,7 +35,7 @@ export default {
   },
   computed: {
     formData () {
-      return this.$store.getters.codeShowData
+      return this.$store.state.codeData
     }
   },
   methods: {

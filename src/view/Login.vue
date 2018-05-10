@@ -12,7 +12,7 @@
                             type="text"
                             v-model="form.account"
                             required
-                            placeholder="请输入账户">
+                            placeholder="请输入手机号或者邮箱登陆">
               </b-form-input>
             </b-form-group>
             <b-form-group id="exampleInputGroup2"
@@ -67,7 +67,7 @@ export default {
     onSubmit (evt) {
       evt.preventDefault();
       // alert(JSON.stringify(this.form));
-      this.$store.dispatch('SIGNIN').then(res => { 
+      this.$store.dispatch('SIGNIN', this.form).then(res => { 
       }, res => {
         this.errorInfo(res)
       })

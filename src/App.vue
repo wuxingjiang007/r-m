@@ -45,8 +45,8 @@ export default {
       return !noBackUrl.includes(name)
     },
     loginState() {
-    // return this.$store.getters.isSign
-    return true
+    return this.$store.getters.isSign
+    // return true
     },
     show () {
       return !!this.appError ? 10 : 0;
