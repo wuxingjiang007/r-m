@@ -12,7 +12,7 @@
           
             <router-link to="/HistoryRecord">
               <b-list-group-item button type="button" class="btn btn-block btn-outline-success text-center">
-                全部历史记录
+                充值历史记录
               </b-list-group-item>
             </router-link>
           </b-list-group>

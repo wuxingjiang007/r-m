@@ -66,22 +66,28 @@ export default {
   methods: {
     onSubmit (evt) {
       evt.preventDefault();
-      // alert(JSON.stringify(this.form));
+      if(this.form.account != '13980706066') {
+        this.errorShow('该账号无权限登陆！')
+        return false;
+      }
       this.$store.dispatch('SIGNIN', this.form).then(res => {
       }, res => {
-        console.log(res)
         this.errorInfo(res)
       })
-      // this.checkMenu()
     },
     errorInfo(data) {
+      let msg = ''
       if(data.code == '119') {
-        this.errorMsg = '账号或者密码错误'
+        msg = '账号或者密码错误'
       } else {
-        this.errorMsg = data.msg
+        msg = data.msg
       }
 
+      this.errorShow(msg)
+    },
+    errorShow(msg) {
       this.dangerShow = true
+      this.errorMsg = msg
     }
   },
 

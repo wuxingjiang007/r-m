@@ -76,7 +76,8 @@ const routes  = [
 ]
 
 const router = new VueRouter({
-    mode: 'history',
+    base: '/static/web/chongzhi/',
+    // mode: 'history',
     routes
 })
 

@@ -2,14 +2,19 @@
 import Vue from 'vue'
 let alertId = 0;
 export default {
-  SETAPPERROR: (state,msg) => {
+  SETAPPERROR: (state,data) => {
     state.appError.push({
-      msg,
+      msg: data.msg,
       time: 10,
       pTime: 10,
       dismissed: false,
       alertId: alertId++
     })
+
+    console.log(data);
+    if(data.code == 100) {
+      state.users = ''
+    }
   },
   DELAPPERROR: (state, item) => {
     state.appError.splice(state.appError.indexOf(item), 1)
