@@ -1,4 +1,4 @@
-
+// 注释这你也注释这我
 import Vue from 'vue'
 let alertId = 0;
 export default {
