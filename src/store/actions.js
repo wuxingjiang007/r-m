@@ -15,7 +15,7 @@ import {
 } from '../assets/common'
 
 export default {
-  SIGNIN: ({commit}, data) => {
+  SIGNIN: ({ commit }, data) => {
     return new Promise((resolve, reject) => {
       var formData = new FormData();
 
@@ -29,7 +29,7 @@ export default {
       })
     })
   },
-  CHECKSIGN: ({commit}) => {
+  CHECKSIGN: ({ commit }) => {
     return new Promise((resolve, reject) => {
       checkSign().then(res => {
         resolve()
@@ -41,19 +41,19 @@ export default {
       })
     })
   },
-  SIGNOUT: ({commit}) => {
+  SIGNOUT: ({ commit }) => {
     return new Promise((resolve, reject) => {
       signOut().then(res => {
         resolve()
         commit('SETUSERS', '')
       }, () => {
         // 没有登录
-        
+
         reject()
       })
     })
   },
-  SAVEORDER: ({getters, commit}) => {
+  SAVEORDER: ({ getters, commit }) => {
     return new Promise((resolve, reject) => {
       saveOrder(getters.sumbitMoneyForm).then(res => {
         resolve(res)
@@ -63,7 +63,7 @@ export default {
       })
     })
   },
-  SAVECODE: ({getters, commit}) => {
+  SAVECODE: ({ getters, commit }) => {
     return new Promise((resolve, reject) => {
       addCouponCode(getters.sumbitCodeForm).then(res => {
         resolve(res)
@@ -73,7 +73,7 @@ export default {
       })
     })
   },
-  GETLISTCOUPON: ({getters, commit}, data) => {
+  GETLISTCOUPON: ({ getters, commit }, data) => {
     return new Promise((resolve, reject) => {
       getListCouponCode(data).then(res => {
         resolve(res)
@@ -83,28 +83,28 @@ export default {
       })
     })
   },
-  GETLISTORDER: ({getters, commit}, data) => {
+  GETLISTORDER: ({ getters, commit }, data) => {
     return new Promise((resolve, reject) => {
-      getListOrder(data).then(res=> {
+      getListOrder(data).then(res => {
         resolve(res)
       }, res => {
         commit('SETAPPERROR', res.msg)
       })
     })
-    
+
   },
-  GETCOUPONDETAIL: ({commit}, data) => {
+  GETCOUPONDETAIL: ({ commit }, data) => {
     return new Promise((resolve, reject) => {
-      getCouponDetail(data).then(res=> {
+      getCouponDetail(data).then(res => {
         resolve(res)
       }, res => {
         commit('SETAPPERROR', res.msg)
       })
     })
   },
-  GETORDERDETAIL: ({commit}, data) => {
+  GETORDERDETAIL: ({ commit }, data) => {
     return new Promise((resolve, reject) => {
-      getOrderDetail(data).then(res=> {
+      getOrderDetail(data).then(res => {
         resolve(res)
       }, res => {
         commit('SETAPPERROR', res.msg)

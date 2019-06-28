@@ -12,7 +12,7 @@ import MoneyManagementSuc from '../view/MoneyManagementSuc.vue'
 import CodeMangementNext from '../view/CodeMangementNext.vue'
 import CodeManagementSuc from '../view/CodeManagementSuc.vue'
 
-const routes  = [
+const routes = [
     {
         path: '/',
         redirect: '/Login'
