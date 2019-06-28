@@ -1,0 +1,5 @@
+REVIEWBOARD_URL = "http://172.24.108.192:5432"
+REPOSITORY = "r-m"
+REPOSITORY_TYPE = "git"
+BRANCH = "master"
+LAND_DEST_BRANCH = "master"

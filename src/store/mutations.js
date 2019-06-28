@@ -2,7 +2,7 @@
 import Vue from 'vue'
 let alertId = 0;
 export default {
-  SETAPPERROR: (state,msg) => {
+  SETAPPERROR: (state, msg) => {
     state.appError.push({
       msg,
       time: 10,
