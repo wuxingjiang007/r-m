@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-form-group
-      v-if="formData.inputType === 'input'"
+      v-if="formData.inputType == 'input'"
       :label="formData.label"
       :description="formData.description"
       :label-for="formData.inputId"
