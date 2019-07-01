@@ -83,7 +83,7 @@
 </template>
 <script>
 import Datepicker from "vuejs-datepicker"; // 日期选择插件x
-import { zh } from "vuejs-datepicker/dist/locale"; // 日期插件语言设置x2
+import { zh } from "vuejs-datepicker/dist/locale"; // 日期插件语言设置
 export default {
   name: "Form",
   props: ["formData"],
