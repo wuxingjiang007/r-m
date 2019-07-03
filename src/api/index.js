@@ -5,7 +5,6 @@ const vue = new Vue;
 
 const fetch = (path, data, method = 'post') => {
   let loader = vue.$loading.show()
-  console.log(vue.$loading)
   return new Promise((resolve, reject) => {
     if(Object.prototype.toString.call(data) !== '[object FormData]') {
       data = {params: data}

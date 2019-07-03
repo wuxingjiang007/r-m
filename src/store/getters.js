@@ -1,4 +1,4 @@
-import { dateFormat } from '../assets/common.js'
+import {dateFormat} from '../assets/common'
 
 function strMapToObj(strMap) {
   let obj = Object.create(null);

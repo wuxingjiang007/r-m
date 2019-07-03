@@ -59,6 +59,8 @@ export default {
     loginState(val) {
       if(val) {
         this.checkMenu()
+      } else {
+         this.$router.push('/Login')
       }
     },
     dismissCountDown (val) {

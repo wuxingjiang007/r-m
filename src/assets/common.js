@@ -3,7 +3,6 @@ export function getEmail(str) {
 }
 
 export function dateFormat(date, fmt = 'yyyy-MM-dd') {
-    console.log(date)
     var o = {
       "M+" : date.getMonth()+1,                 //月份
       "d+" : date.getDate(),                    //日

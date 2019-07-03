@@ -6,8 +6,8 @@ import Vuex from 'vuex'
 import Loading from 'vue-loading-overlay';
 
 
-import router from './router/index.js'
-import browser from './assets/browser.js'
+import router from './router'
+import browser from './assets/browser'
 
 import {createStore} from './store'
 import App from './App.vue'

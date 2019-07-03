@@ -105,22 +105,30 @@ export default {
   },
   methods: {
     info (item, index, button) {
-
-      console.log(item)
       this.$store.dispatch('GETCOUPONDETAIL', {id:item.id}).then(res => {
         console.log(res);
-        var detail = res.data
-        const data = {
-          '申请时间': dateFormat(new Date(detail.createTime)),
-          '申请人': detail.creator,
-          '金额': detail.subscriptPackages,
-          // '数量': '',
-          // '总额': '',
-          '有效日期': dateFormat(new Date(detail.createTime)) + '/' + dateFormat(new Date(detail.createTime)),
-          '备注': detail.comment,
+        var detail = res.data.couponCode
+        var userDetail = res.data.userInfo
+        let userInfo = {}
+        if(userDetail) {
+          userInfo = {
+            '使用人昵称': userDetail.nickName || '',
+            '使用人id': userDetail.id || '',
+            '使用人邮箱': userDetail.email || '',
+            '使用时间': dateFormat(new Date(userDetail.createTime)) || '',
+          }
         }
+        let data = {
+          '申请时间': dateFormat(new Date(detail.createTime)) || '',
+          '申请人': detail.creator || '',
+          '金额': detail.subscriptPackages || '',
+          '有效日期': dateFormat(new Date(detail.createTime)) + '/' + dateFormat(new Date(detail.createTime)) || '',
+          '备注': detail.comment || '',
+        }
+
+        console.log()
       this.modalInfo.title = `详情`
-      this.modalInfo.content = JSON.stringify(data, null, 2)
+      this.modalInfo.content = JSON.stringify(Object.assign({}, userInfo, data), null, 2)
       this.$root.$emit('bv::show::modal', 'modalInfo', button)
       })
     },

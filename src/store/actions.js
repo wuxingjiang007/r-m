@@ -59,7 +59,7 @@ export default {
         resolve(res)
       }, (res) => {
         reject(res)
-        commit('SETAPPERROR', res.msg)
+        commit('SETAPPERROR', res)
       })
     })
   },
@@ -69,7 +69,7 @@ export default {
         resolve(res)
       }, res => {
         reject(res)
-        commit('SETAPPERROR', res.msg)
+        commit('SETAPPERROR', res)
       })
     })
   },
@@ -79,7 +79,7 @@ export default {
         resolve(res)
       }, res => {
         // reject(res)
-        commit('SETAPPERROR', res.msg)
+        commit('SETAPPERROR', res)
       })
     })
   },
@@ -88,7 +88,7 @@ export default {
       getListOrder(data).then(res => {
         resolve(res)
       }, res => {
-        commit('SETAPPERROR', res.msg)
+        commit('SETAPPERROR', res)
       })
     })
 
@@ -98,7 +98,7 @@ export default {
       getCouponDetail(data).then(res => {
         resolve(res)
       }, res => {
-        commit('SETAPPERROR', res.msg)
+        commit('SETAPPERROR', res)
       })
     })
   },
@@ -107,7 +107,7 @@ export default {
       getOrderDetail(data).then(res => {
         resolve(res)
       }, res => {
-        commit('SETAPPERROR', res.msg)
+        commit('SETAPPERROR', res)
       })
     })
   }
